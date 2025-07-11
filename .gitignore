@@ -1,0 +1,15 @@
+# Go
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Node/TypeScript
+node_modules/
+dist/
+
+# Python
+__pycache__/
+*.pyc
+EOF
+.env
