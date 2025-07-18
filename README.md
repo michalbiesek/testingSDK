@@ -16,3 +16,17 @@ The real `.env` is ignored by Git; to get started:
    cp .env.example .env
 
 2. Open .env in your editor and fill in your own values:
+
+## Build, Run & Update
+
+All commands assume you’re in the repo root and have your `.env` set up.
+
+```bash
+# Build Go, TS & Python clients
+make build
+
+# Run all clients
+make run
+
+# Pull in the latest Cribl SDKs across all clients
+make update-sdk

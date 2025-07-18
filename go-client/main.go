@@ -49,7 +49,7 @@ func main() {
 		}),
 	)
 
-	res, err := s.Diag.GetHealthInfo(ctx)
+	res, err := s.Health.GetHealthInfo(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}

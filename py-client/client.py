@@ -24,5 +24,5 @@ if __name__ == "__main__":
         ),
     ) as ccp_client:
 
-        res = ccp_client.diag.get_health_info()
+        res = ccp_client.health.get_health_info()
         print(res)

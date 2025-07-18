@@ -1,7 +1,12 @@
 SHELL := /usr/bin/env bash
 PYTHON := python3
+ifeq ($(shell uname),Darwin)
+SED_INPLACE := -i ''
+else
+SED_INPLACE := -i
+endif
 
-.PHONY: all build run go-build go-run ts-build ts-run py-build py-run clean help
+.PHONY: all build run go-build go-run ts-build ts-run py-build py-run clean  update-sdk update-go-sdk update-ts-sdk update-py-sdk help
 
 # Default: build everything
 all: build           ## Build all clients
@@ -47,6 +52,31 @@ clean:                            ## Remove build artifacts
 	rm -rf go-client/go.sum \
 	       ts-client/node_modules ts-client/dist \
 	       py-client/venv py-client/__pycache__
+
+update-sdk: update-go-sdk update-ts-sdk update-py-sdk
+	@echo "All SDKs updated to latest cribl-control-plane versions"
+
+update-go-sdk:   ## Update Go client to latest cribl-control-plane-sdk-go
+	cd go-client && \
+	go get github.com/criblio/cribl-control-plane-sdk-go@latest && \
+	go mod tidy
+
+update-ts-sdk:   ## Update TS client to latest cribl-control-plane
+	cd ts-client && \
+	npm install cribl-control-plane@latest --save
+
+update-py-sdk:   ## Update Python client to latest cribl-control-plane
+	cd py-client && \
+	LATEST_TAG=$$( \
+	  git ls-remote --tags https://github.com/criblio/cribl_control_plane_sdk_python.git \
+	    | awk -F/ '{print $$NF}' \
+	    | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$$' \
+	    | sort -V \
+	    | tail -n1 \
+	) && \
+	sed -i.bak -E "s#(cribl_control_plane_sdk_python\.git@)[^#]+#\1$${LATEST_TAG}#" requirements.txt && \
+	rm requirements.txt.bak &&  \
+	venv/bin/pip install --upgrade -r requirements.txt
 
 # --- Help ---
 help:                             ## Show this help

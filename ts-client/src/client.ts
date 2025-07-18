@@ -15,7 +15,7 @@ const criblControlPlane = new CriblControlPlane({
   },
 });
 (async () => {
-  const result = await criblControlPlane.diag.getHealthInfo();
+  const result = await criblControlPlane.health.getHealthInfo();
 
   console.log(result);
 })();

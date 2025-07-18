@@ -1,2 +1,2 @@
 python-dotenv
-git+https://github.com/criblio/cribl_control_plane_sdk_python.git@v0.0.3#egg=cribl-control-plane
+git+https://github.com/criblio/cribl_control_plane_sdk_python.git@v0.0.8#egg=cribl-control-plane
