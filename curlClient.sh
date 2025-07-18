@@ -44,7 +44,7 @@ ACCESS_TOKEN=$(
 )
 echo $ACCESS_TOKEN
 
-API_URL="https://${WORKSPACE_NAME}-${ORG_ID}.${CRIBL_DOMAIN}/api/v1/system/inputs"
+API_URL="https://${WORKSPACE_NAME}-${ORG_ID}.${CRIBL_DOMAIN}/api/v1/m/default/system/inputs"
 echo $API_URL
 echo "Querying inputs API…" >&2
 api_response=$(
