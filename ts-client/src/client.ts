@@ -1,9 +1,13 @@
 import * as path from 'path';
 import * as dotenv from 'dotenv';
 // Load root .env
-dotenv.config({ path: path.resolve(__dirname, '..', '..', '.env') });
+dotenv.config({
+  path: path.resolve(__dirname, '..', '..', '.env'),
+  quiet: true
+});
 import { CriblControlPlane } from "cribl-control-plane";
 
+process.env.CRIBLCONTROLPLANE_AUDIENCE = process.env.CRIBL_AUDIENCE;
 const criblControlPlane = new CriblControlPlane({
   serverURL: `https://${process.env.WORKSPACE_NAME}-${process.env.ORG_ID}.${process.env.CRIBL_DOMAIN}/api/v1`,
   security: {
@@ -16,6 +20,7 @@ const criblControlPlane = new CriblControlPlane({
 });
 (async () => {
   const result = await criblControlPlane.health.getHealthInfo();
-
-  console.log(result);
+  console.log("This is healthInfo:", result);
+  const listInputs = await criblControlPlane.inputs.listInput();
+  console.log("This is List of inputs:", listInputs);
 })();
