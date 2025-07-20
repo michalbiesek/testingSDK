@@ -19,7 +19,7 @@ const {
 
 const baseUrl = `https://${WORKSPACE_NAME}-${ORG_ID}.${CRIBL_DOMAIN}/api/v1`;
 const wgUrl   = `${baseUrl}/m/default`;
-process.env.CRIBLCONTROLPLANE_AUDIENCE = CRIBL_AUDIENCE!;
+process.env.CRIBLCONTROLPLANE_AUDIENCE = CRIBL_AUDIENCE;
 
 const cribl = new CriblControlPlane({
   serverURL: `https://${process.env.WORKSPACE_NAME}-${process.env.ORG_ID}.${process.env.CRIBL_DOMAIN}/api/v1`,

@@ -53,7 +53,7 @@ clean:                            ## Remove build artifacts
 	       ts-client/node_modules ts-client/dist \
 	       py-client/venv py-client/__pycache__
 
-update-sdk: update-go-sdk update-ts-sdk update-py-sdk
+update-sdk: update-go-sdk update-ts-sdk update-py-sdk. ## Update Go, TS, and Python SDKs to the latest cribl-control-plane versions
 	@echo "All SDKs updated to latest cribl-control-plane versions"
 
 update-go-sdk:   ## Update Go client to latest cribl-control-plane-sdk-go
@@ -80,5 +80,9 @@ update-py-sdk:   ## Update Python client to latest cribl-control-plane
 
 # --- Help ---
 help:                             ## Show this help
-	@grep -E '^[a-zA-Z0-9_-]+:.*?##' $(MAKEFILE_LIST) \
-		| awk 'BEGIN {FS = ":[[:space:]]*"}; {printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z0-9_-]+:.*?##' $(MAKEFILE_LIST) | \
+	while IFS= read -r line; do \
+	  target=$${line%%:*}; \
+	  desc=$${line##*## }; \
+	  echo -e "  \e[36m$${target}\e[0m $${desc}"; \
+	done

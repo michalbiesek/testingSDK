@@ -3,7 +3,7 @@ module github.com/michalbiesek/testinSDK/go-client
 go 1.24.2
 
 require (
-	github.com/criblio/cribl-control-plane-sdk-go v0.0.7
+	github.com/criblio/cribl-control-plane-sdk-go v0.0.8
 	github.com/joho/godotenv v1.5.1
 )
 
