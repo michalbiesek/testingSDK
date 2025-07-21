@@ -38,5 +38,7 @@ const cribl = new CriblControlPlane({
   console.log('Health Info:', health);
 
   const inputs = await cribl.inputs.listInput({serverURL:wgUrl });
-  console.log('Inputs List:', inputs);
+  inputs.items?.forEach((inp, idx) => {
+    console.log(`#${idx}:`, inp.type);
+  });
 })();

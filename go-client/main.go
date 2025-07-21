@@ -62,5 +62,9 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(inputs)
+	if inputs.Object.Items != nil {
+		for i, item := range inputs.Object.Items {
+			fmt.Printf("Id %d Value %v\n", i, item.Type)
+		}
+	}
 }
