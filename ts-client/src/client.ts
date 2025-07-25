@@ -37,8 +37,26 @@ const cribl = new CriblControlPlane({
   const health = await cribl.health.getHealthInfo();
   console.log('Health Info:', health);
 
-  const inputs = await cribl.inputs.listInput({serverURL:wgUrl });
+  const inputs = await cribl.sources.listSource({serverURL:wgUrl });
   inputs.items?.forEach((inp, idx) => {
     console.log(`#${idx}:`, inp.type);
   });
+  const source = await cribl.sources.createSource({
+    type: "tcp",
+    disabled: false,
+    sendToRoutes: true,
+    pqEnabled: false,
+    host: "0.0.0.0",
+    port: 301.76,
+    ipWhitelistRegex: "/.*/",
+    maxActiveCxn: 1000,
+    socketIdleTimeout: 0,
+    socketEndingMaxWait: 30,
+    socketMaxLifespan: 0,
+    enableProxyHeader: false,
+    staleChannelFlushMs: 10000,
+    enableHeader: false,
+    authType: "manual",
+  } , { serverURL: wgUrl })
+  console.log('Created Source', source);
 })();

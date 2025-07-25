@@ -9,7 +9,6 @@ import (
 
 	criblcontrolplanesdkgo "github.com/criblio/cribl-control-plane-sdk-go"
 	"github.com/criblio/cribl-control-plane-sdk-go/models/components"
-	"github.com/criblio/cribl-control-plane-sdk-go/models/operations"
 	"github.com/joho/godotenv"
 )
 
@@ -29,7 +28,7 @@ func main() {
 	clientSecret := os.Getenv("CLIENT_SECRET")
 
 	serverURL := fmt.Sprintf("https://%s-%s.%s/api/v1", workspace, orgID, domain)
-	wgURL := fmt.Sprintf("%s/m/default", serverURL)
+	// wgURL := fmt.Sprintf("%s/m/default", serverURL)
 	os.Setenv("CRIBLCONTROLPLANE_AUDIENCE", os.Getenv("CRIBL_AUDIENCE"))
 
 	tokenURL := fmt.Sprintf(
@@ -58,13 +57,14 @@ func main() {
 		fmt.Printf("Status:    %s\n", hs.Status)
 		fmt.Printf("StartTime: %v\n", hs.StartTime)
 	}
-	inputs, err := s.Inputs.ListInput(ctx, operations.WithServerURL(wgURL))
-	if err != nil {
-		log.Fatal(err)
-	}
-	if inputs.Object.Items != nil {
-		for i, item := range inputs.Object.Items {
-			fmt.Printf("Id %d Value %v\n", i, item.Type)
-		}
-	}
+	// inputs, err := s.Sources.CreateSource()
+
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// if inputs.Object.Items != nil {
+	// 	for i, item := range inputs.Object.Items {
+	// 		fmt.Printf("Id %d Value %v\n", i, item.Id, item.Type)
+	// 	}
+	// }
 }
